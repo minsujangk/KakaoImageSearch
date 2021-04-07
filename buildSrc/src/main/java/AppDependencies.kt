@@ -5,21 +5,22 @@ import org.gradle.api.artifacts.dsl.DependencyHandler
  */
 object AppDependencies {
     // kotlin
-    val kotlinStdLib = ("org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}")
+    val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
 
     // android essentials
-    val coreKtx = ("androidx.core:core-ktx:${Versions.coreKtx}")
-    val appcompat = ("androidx.appcompat:appcompat:${Versions.appcompat}")
-    val material = ("com.google.android.material:material:${Versions.material}")
+    val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
+    val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
+    val material = "com.google.android.material:material:${Versions.material}"
+    val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
 
     // android ui
     val constraintLayout =
-        ("androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}")
+        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
 
     // test
-    val junit = ("junit:junit:${Versions.junit}")
-    val extJunit = ("androidx.test.ext:junit:${Versions.extJunit}")
-    val espressoCore = ("androidx.test.espresso:espresso-core:${Versions.espressoCore}")
+    val junit = "junit:junit:${Versions.junit}"
+    val extJunit = "androidx.test.ext:junit:${Versions.extJunit}"
+    val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
 
     // hilt
     val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
@@ -32,6 +33,8 @@ object AppDependencies {
         add(appcompat)
         add(material)
         add(hilt)
+        add(constraintLayout)
+        add(viewmodelKtx)
     }
 
     val testImplementations = arrayListOf<String>().apply {
