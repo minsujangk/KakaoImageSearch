@@ -21,11 +21,17 @@ object AppDependencies {
     val extJunit = ("androidx.test.ext:junit:${Versions.extJunit}")
     val espressoCore = ("androidx.test.espresso:espresso-core:${Versions.espressoCore}")
 
+    // hilt
+    val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
+    val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
+
+
     val implementations = arrayListOf<String>().apply {
         add(kotlinStdLib)
         add(coreKtx)
         add(appcompat)
         add(material)
+        add(hilt)
     }
 
     val testImplementations = arrayListOf<String>().apply {
@@ -35,6 +41,10 @@ object AppDependencies {
     val androidTestImplementations = arrayListOf<String>().apply {
         add(extJunit)
         add(espressoCore)
+    }
+
+    val kapts = arrayListOf<String>().apply {
+        add(hiltCompiler)
     }
 }
 
