@@ -37,6 +37,30 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    flavorDimensions("default")
+    productFlavors {
+        create("dev") {
+            dimension = "default"
+            applicationIdSuffix = ".dev"
+            addBuildConfigField(
+                com.android.builder.internal.ClassFieldImpl(
+                    "String",
+                    "BASE_URL",
+                    "\"dapi.kakao.com\""
+                )
+            )
+        }
+        create("prod") {
+            dimension = "default"
+            addBuildConfigField(
+                com.android.builder.internal.ClassFieldImpl(
+                    "String",
+                    "BASE_URL",
+                    "\"dapi.kakao.com\""
+                )
+            )
+        }
+    }
 }
 
 dependencies {

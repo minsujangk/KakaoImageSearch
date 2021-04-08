@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import nobleminsu.kakaoimagesearch.BuildConfig
+import nobleminsu.kakaoimagesearch.network.interfaces.KakaoInterceptor
 import nobleminsu.kakaoimagesearch.network.interfaces.MainApiInterface
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -14,8 +16,10 @@ import javax.inject.Singleton
 object NetworkModule {
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().build()
+    fun provideOkHttpClient(kakaoInterceptor: KakaoInterceptor): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(kakaoInterceptor.interceptor)
+            .build()
     }
 
     @Provides
@@ -23,6 +27,7 @@ object NetworkModule {
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
+            .baseUrl(BuildConfig.BASE_URL)
             .build()
     }
 
