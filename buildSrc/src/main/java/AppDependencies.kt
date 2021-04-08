@@ -11,7 +11,9 @@ object AppDependencies {
     val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     val material = "com.google.android.material:material:${Versions.material}"
-    val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
+    val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewModelKtx}"
+    val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.liveDataKtx}"
+    val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtx}"
 
     // android ui
     val constraintLayout =
@@ -26,6 +28,9 @@ object AppDependencies {
     val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
     val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
 
+    // retrofit
+    val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+
 
     val implementations = arrayListOf<String>().apply {
         add(kotlinStdLib)
@@ -35,6 +40,9 @@ object AppDependencies {
         add(hilt)
         add(constraintLayout)
         add(viewmodelKtx)
+        add(liveDataKtx)
+        add(fragmentKtx)
+        add(retrofit)
     }
 
     val testImplementations = arrayListOf<String>().apply {
