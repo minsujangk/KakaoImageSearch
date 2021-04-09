@@ -58,7 +58,7 @@ android {
                 com.android.builder.internal.ClassFieldImpl(
                     "String",
                     "BASE_URL",
-                    "\"dapi.kakao.com\""
+                    "\"https://dapi.kakao.com\""
                 )
             )
         }
@@ -68,7 +68,7 @@ android {
                 com.android.builder.internal.ClassFieldImpl(
                     "String",
                     "BASE_URL",
-                    "\"dapi.kakao.com\""
+                    "\"https://dapi.kakao.com\""
                 )
             )
         }
