@@ -24,4 +24,8 @@ object Versions {
 
     // retrofit
     val retrofit = "2.9.0"
+    val okhttpInterceptor = "4.9.0"
+
+    // logging
+    val timber = "4.7.1"
 }

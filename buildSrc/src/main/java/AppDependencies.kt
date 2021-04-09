@@ -30,6 +30,11 @@ object AppDependencies {
 
     // retrofit
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+    val okhttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttpInterceptor}"
+
+    // logging
+    val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
 
     val implementations = arrayListOf<String>().apply {
@@ -43,6 +48,9 @@ object AppDependencies {
         add(liveDataKtx)
         add(fragmentKtx)
         add(retrofit)
+        add(retrofitGson)
+        add(okhttpInterceptor)
+        add(timber)
     }
 
     val testImplementations = arrayListOf<String>().apply {
