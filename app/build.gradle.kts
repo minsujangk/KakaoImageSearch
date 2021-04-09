@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -7,6 +9,15 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        create("release_key") {
+            val properties = gradleLocalProperties(rootDir)
+            storeFile = file(properties.getProperty("storeFile"))
+            storePassword = properties.getProperty("storePassword")
+            keyAlias = properties.getProperty("keyAlias")
+            keyPassword = properties.getProperty("keyPassword")
+        }
+    }
     compileSdkVersion(AppConfig.compileSdk)
     buildToolsVersion(AppConfig.buildTools)
 
@@ -28,6 +39,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release_key")
         }
     }
     compileOptions {
