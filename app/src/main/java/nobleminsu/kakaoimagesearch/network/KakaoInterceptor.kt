@@ -1,4 +1,4 @@
-package nobleminsu.kakaoimagesearch.network.interfaces
+package nobleminsu.kakaoimagesearch.network
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
