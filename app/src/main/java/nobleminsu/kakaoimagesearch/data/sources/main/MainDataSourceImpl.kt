@@ -1,6 +1,6 @@
-package nobleminsu.kakaoimagesearch.data.sources
+package nobleminsu.kakaoimagesearch.data.sources.main
 
-import nobleminsu.kakaoimagesearch.data.sources.remote.MainRemoteDataSource
+import nobleminsu.kakaoimagesearch.data.sources.main.remote.MainRemoteDataSource
 import javax.inject.Inject
 
 class MainDataSourceImpl @Inject constructor(

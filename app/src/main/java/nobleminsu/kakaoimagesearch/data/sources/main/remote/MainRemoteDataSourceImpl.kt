@@ -1,6 +1,5 @@
-package nobleminsu.kakaoimagesearch.data.sources.remote
+package nobleminsu.kakaoimagesearch.data.sources.main.remote
 
-import nobleminsu.kakaoimagesearch.data.repositories.main.MainRepository
 import nobleminsu.kakaoimagesearch.network.interfaces.MainApiInterface
 import javax.inject.Inject
 
