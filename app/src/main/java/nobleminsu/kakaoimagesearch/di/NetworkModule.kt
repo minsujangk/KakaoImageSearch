@@ -1,11 +1,12 @@
-package nobleminsu.kakaoimagesearch.data.di
+package nobleminsu.kakaoimagesearch.di
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import nobleminsu.kakaoimagesearch.BuildConfig
-import nobleminsu.kakaoimagesearch.network.interfaces.KakaoInterceptor
+import nobleminsu.kakaoimagesearch.network.KakaoInterceptor
+import nobleminsu.kakaoimagesearch.network.interfaces.KakaoApiInterface
 import nobleminsu.kakaoimagesearch.network.interfaces.MainApiInterface
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -35,5 +36,11 @@ object NetworkModule {
     @Singleton
     fun providesMainApiInterface(retrofit: Retrofit): MainApiInterface {
         return retrofit.create(MainApiInterface::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun providesKakaoApiInterface(retrofit: Retrofit): KakaoApiInterface {
+        return retrofit.create(KakaoApiInterface::class.java)
     }
 }

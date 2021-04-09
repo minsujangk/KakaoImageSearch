@@ -1,14 +1,11 @@
-package nobleminsu.kakaoimagesearch.data.di
+package nobleminsu.kakaoimagesearch.di
 
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.components.ActivityRetainedComponent
-import nobleminsu.kakaoimagesearch.data.sources.MainDataSource
-import nobleminsu.kakaoimagesearch.data.sources.MainDataSourceImpl
-import javax.inject.Singleton
+import nobleminsu.kakaoimagesearch.data.sources.main.MainDataSource
+import nobleminsu.kakaoimagesearch.data.sources.main.MainDataSourceImpl
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
