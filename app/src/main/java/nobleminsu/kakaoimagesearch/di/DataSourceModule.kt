@@ -11,5 +11,5 @@ import nobleminsu.kakaoimagesearch.data.sources.main.MainDataSourceImpl
 @InstallIn(ActivityRetainedComponent::class)
 abstract class DataSourceModule {
     @Binds
-    abstract fun bindMainDataSource(mainDataSourceImpl: MainDataSourceImpl): MainDataSource
+    abstract fun bindsMainDataSource(mainDataSourceImpl: MainDataSourceImpl): MainDataSource
 }
