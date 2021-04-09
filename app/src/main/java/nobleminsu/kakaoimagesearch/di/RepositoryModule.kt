@@ -11,5 +11,5 @@ import nobleminsu.kakaoimagesearch.data.repositories.main.MainRepositoryImpl
 @InstallIn(ActivityRetainedComponent::class)
 abstract class RepositoryModule {
     @Binds
-    abstract fun providesMainRepository(mainRepositoryImpl: MainRepositoryImpl): MainRepository
+    abstract fun bindsMainRepository(mainRepositoryImpl: MainRepositoryImpl): MainRepository
 }
