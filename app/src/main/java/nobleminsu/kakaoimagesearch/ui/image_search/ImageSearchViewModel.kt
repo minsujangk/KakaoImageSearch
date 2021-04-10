@@ -13,10 +13,10 @@ import javax.inject.Inject
 @HiltViewModel
 class ImageSearchViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val imageSearchRemotePagingSource: ImageSearchRemotePagingSource
+    private val imageSearchRemotePagingSourceFactory: ImageSearchRemotePagingSource.Factory
 ) : ViewModel() {
     val searchDocuments =
         Pager(PagingConfig(pageSize = ImageSearchRemotePagingSource.PAGE_SIZE)) {
-            imageSearchRemotePagingSource.apply { query = "pop" }
+            imageSearchRemotePagingSourceFactory.create("voice")
         }.flow.cachedIn(viewModelScope)
 }

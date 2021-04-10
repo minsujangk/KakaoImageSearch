@@ -2,18 +2,18 @@ package nobleminsu.kakaoimagesearch.data.sources.image_search
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import nobleminsu.kakaoimagesearch.data.common.DataResult
 import nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto
 import nobleminsu.kakaoimagesearch.network.apiCall
 import nobleminsu.kakaoimagesearch.network.interfaces.KakaoApiInterface
-import javax.inject.Inject
 
-// TODO: AssistedInject
-class ImageSearchRemotePagingSource @Inject constructor(
+class ImageSearchRemotePagingSource @AssistedInject constructor(
     private val kakaoApiInterface: KakaoApiInterface,
+    @Assisted private val query: String
 ) : PagingSource<Int, ImageSearchResponseDocumentDto>() {
-    var query: String = "kakao"
-
     override fun getRefreshKey(state: PagingState<Int, ImageSearchResponseDocumentDto>): Int? {
         return state.anchorPosition
     }
@@ -38,6 +38,11 @@ class ImageSearchRemotePagingSource @Inject constructor(
             )
             is DataResult.Failure -> LoadResult.Error(response.cause)
         }
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(query: String): ImageSearchRemotePagingSource
     }
 
     companion object {
