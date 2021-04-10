@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KakaoImageSearch">
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.image_search.ImageSearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,6 +20,5 @@
             </intent-filter>
         </activity>
     </application>
-
 
 </manifest>
