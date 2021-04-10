@@ -8,8 +8,8 @@ interface KakaoApiInterface {
     @GET("/v2/search/image")
     suspend fun getImageSearch(
         @Query("query") query: String,
-        @Query("sort") sort: String?,
-        @Query("page") page: Int?,
-        @Query("size") size: Int?
+        @Query("sort") sort: String? = null,
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null
     ): ImageSearchResponseDto
 }

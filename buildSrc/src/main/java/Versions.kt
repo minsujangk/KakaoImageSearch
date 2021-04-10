@@ -28,4 +28,7 @@ object Versions {
 
     // logging
     val timber = "4.7.1"
+
+    // paging
+    val paging = "3.0.0-beta02"
 }

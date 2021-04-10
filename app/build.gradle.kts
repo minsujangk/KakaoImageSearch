@@ -73,6 +73,10 @@ android {
             )
         }
     }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -80,4 +84,5 @@ dependencies {
     testImplementation(AppDependencies.testImplementations)
     androidTestImplementation(AppDependencies.androidTestImplementations)
     kapt(AppDependencies.kapts)
+    kapt ("androidx.hilt:hilt-compiler:1.0.0-beta01")
 }

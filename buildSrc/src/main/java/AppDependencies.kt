@@ -36,6 +36,12 @@ object AppDependencies {
     // logging
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
+    // paging
+    val pagingRumtime = "androidx.paging:paging-runtime:${Versions.paging}"
+
+    // alternatively - without Android dependencies for tests
+    val pagingCommon = "androidx.paging:paging-common:${Versions.paging}"
+
 
     val implementations = arrayListOf<String>().apply {
         add(kotlinStdLib)
@@ -51,10 +57,12 @@ object AppDependencies {
         add(retrofitGson)
         add(okhttpInterceptor)
         add(timber)
+        add(pagingRumtime)
     }
 
     val testImplementations = arrayListOf<String>().apply {
         add(junit)
+        add(pagingCommon)
     }
 
     val androidTestImplementations = arrayListOf<String>().apply {
