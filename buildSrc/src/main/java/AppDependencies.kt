@@ -42,6 +42,8 @@ object AppDependencies {
     // alternatively - without Android dependencies for tests
     val pagingCommon = "androidx.paging:paging-common:${Versions.paging}"
 
+    // glide
+    val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
 
     val implementations = arrayListOf<String>().apply {
         add(kotlinStdLib)
@@ -58,6 +60,7 @@ object AppDependencies {
         add(okhttpInterceptor)
         add(timber)
         add(pagingRumtime)
+        add(glide)
     }
 
     val testImplementations = arrayListOf<String>().apply {

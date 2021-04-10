@@ -31,4 +31,7 @@ object Versions {
 
     // paging
     val paging = "3.0.0-beta02"
+
+    // glide
+    val glide = "4.12.0"
 }
