@@ -2,10 +2,8 @@ package nobleminsu.kakaoimagesearch.ui.image_search.view
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
 import nobleminsu.kakaoimagesearch.R
@@ -51,41 +49,12 @@ class ImageViewActivity : AppCompatActivity() {
         }
 
         imageViewViewModel.isImageInfoShown.observe(this) {
-            fun View.startEnterAnim(fromTop: Boolean) {
-                animate().alpha(1f)
-                    .withStartAction {
-                        isVisible = true
-                        alpha = 0f
-                        translationY =
-                            (height * (if (fromTop) -1 else 1)).toFloat()
-                    }
-                    .translationY(0f)
-                    .withEndAction { isVisible = true }
-                    .start()
-            }
-
-            fun View.startExitAnim(toTop: Boolean) {
-                animate().alpha(0f)
-                    .withStartAction {
-                        alpha = 1f
-                        translationY = 0f
-                    }
-                    .translationYBy((height * (if (toTop) -1 else 1)).toFloat())
-                    .withEndAction { isVisible = false }
-                    .start()
-            }
-            if (it) {
-                binding.toolbarImageView.startEnterAnim(true)
-                binding.constraintLayoutImageViewInfo.startEnterAnim(false)
-            } else {
-                binding.toolbarImageView.startExitAnim(true)
-                binding.constraintLayoutImageViewInfo.startExitAnim(false)
-            }
-            if (it) {
-                imageViewViewModel.hideViewAfter(5000)
-            } else {
-                imageViewViewModel.cancelHideViewJob()
-            }
+            animateImageInfoVisibilityChange(
+                binding.toolbarImageView,
+                binding.constraintLayoutImageViewInfo,
+                it
+            )
+            handleImageInfoAutoHide(imageViewViewModel, it)
         }
     }
 
