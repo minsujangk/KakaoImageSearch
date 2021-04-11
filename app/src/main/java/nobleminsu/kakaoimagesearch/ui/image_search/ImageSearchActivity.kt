@@ -2,6 +2,7 @@ package nobleminsu.kakaoimagesearch.ui.image_search
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -48,5 +49,17 @@ class ImageSearchActivity : AppCompatActivity() {
                 }
             }
         }
+
+        binding.searchViewImageSearch.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                imageSearchViewModel.query.value = if (p0.isNullOrBlank()) "kakao" else p0
+                return true
+            }
+        })
     }
 }
