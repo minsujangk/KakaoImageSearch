@@ -39,6 +39,7 @@ class ImageViewActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbarImageView)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         imageViewViewModel.documentDtoLiveData.observe(this) {
             supportActionBar?.title = it.collection
         }
