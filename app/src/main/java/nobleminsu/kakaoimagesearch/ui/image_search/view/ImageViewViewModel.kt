@@ -1,17 +1,20 @@
 package nobleminsu.kakaoimagesearch.ui.image_search.view
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto
 
 class ImageViewViewModel @AssistedInject constructor(
     @Assisted documentDto: ImageSearchResponseDocumentDto?
 ) : ViewModel() {
     val documentDtoLiveData = liveData { documentDto?.let { emit(it) } }
+    val isImageInfoShown = MutableLiveData(true)
+    var lastJob: Job? = null
 
     @AssistedFactory
     interface Factory {
@@ -28,5 +31,17 @@ class ImageViewViewModel @AssistedInject constructor(
                 return assistedFactory.create(documentDto) as T
             }
         }
+    }
+
+    fun hideViewAfter(timeMillis: Long) {
+        cancelHideViewJob()
+        viewModelScope.launch {
+            delay(timeMillis)
+            isImageInfoShown.value = false
+        }.also { lastJob = it }
+    }
+
+    fun cancelHideViewJob() {
+        lastJob?.cancel()
     }
 }
