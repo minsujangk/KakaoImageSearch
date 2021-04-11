@@ -1,6 +1,8 @@
 package nobleminsu.kakaoimagesearch.data.models
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 data class ImageSearchResponseDto(
@@ -14,6 +16,7 @@ data class ImageSearchResponseMeta(
     @SerializedName("is_end") val isEnd: Boolean
 )
 
+@Parcelize
 data class ImageSearchResponseDocumentDto(
     val collection: String,
     @SerializedName("thumbnail_url") val thumbnailUrl: String,
@@ -23,4 +26,4 @@ data class ImageSearchResponseDocumentDto(
     @SerializedName("display_sitename") val displaySiteName: String,
     @SerializedName("doc_url") val docUrl: String,
     val datetime: Date
-)
+) : Parcelable

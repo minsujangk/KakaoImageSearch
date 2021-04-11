@@ -5,14 +5,23 @@
 
     <data>
 
+        <import type="kotlin.Unit" />
+
+        <import type="nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto" />
+
         <variable
             name="document"
             type="nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto" />
+
+        <variable
+            name="onClick"
+            type="kotlin.jvm.functions.Function1&lt;ImageSearchResponseDocumentDto, Unit>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{_ -> onClick.invoke(document)}">
 
         <ImageView
             android:layout_width="match_parent"

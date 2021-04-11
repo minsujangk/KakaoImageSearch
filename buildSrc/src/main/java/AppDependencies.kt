@@ -45,6 +45,9 @@ object AppDependencies {
     // glide
     val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
 
+    // loupe
+    val loupe = "com.igreenwood.loupe:loupe:${Versions.loupe}"
+
     val implementations = arrayListOf<String>().apply {
         add(kotlinStdLib)
         add(coreKtx)
@@ -61,6 +64,7 @@ object AppDependencies {
         add(timber)
         add(pagingRumtime)
         add(glide)
+        add(loupe)
     }
 
     val testImplementations = arrayListOf<String>().apply {

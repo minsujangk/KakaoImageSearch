@@ -9,10 +9,11 @@ import nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto
 import nobleminsu.kakaoimagesearch.databinding.ItemImageSearchDocumentBinding
 
 // TODO: Image gallery view로 대체
-class ImageSearchPagedListAdapter :
-    PagingDataAdapter<ImageSearchResponseDocumentDto, ImageSearchPagedListAdapter.ViewHolder>(DIFF) {
+class ImageSearchPagedListAdapter(
+    private val onClickImageItem: (document: ImageSearchResponseDocumentDto) -> Unit
+) : PagingDataAdapter<ImageSearchResponseDocumentDto, ImageSearchPagedListAdapter.ViewHolder>(DIFF) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+        getItem(position)?.let { holder.bind(it, onClickImageItem) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,8 +22,12 @@ class ImageSearchPagedListAdapter :
 
     class ViewHolder(private val binding: ItemImageSearchDocumentBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(documentDto: ImageSearchResponseDocumentDto) {
+        fun bind(
+            documentDto: ImageSearchResponseDocumentDto,
+            onClick: (ImageSearchResponseDocumentDto) -> Unit
+        ) {
             binding.document = documentDto
+            binding.onClick = onClick
         }
     }
 

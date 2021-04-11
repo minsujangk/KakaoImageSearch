@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="nobleminsu.kakaoimagesearch.ui.image_search.ImageSearchViewModel" />
+
+        <variable
+            name="eventViewModel"
+            type="nobleminsu.kakaoimagesearch.ui.image_search.ImageSearchEventViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

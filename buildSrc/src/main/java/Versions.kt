@@ -34,4 +34,7 @@ object Versions {
 
     // glide
     val glide = "4.12.0"
+
+    // loupe
+    val loupe = "1.2.1"
 }
