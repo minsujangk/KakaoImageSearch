@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto
 import nobleminsu.kakaoimagesearch.databinding.ItemImageSearchDocumentBinding
 
+// TODO: Image gallery view로 대체
 class ImageSearchPagedListAdapter :
     PagingDataAdapter<ImageSearchResponseDocumentDto, ImageSearchPagedListAdapter.ViewHolder>(DIFF) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
