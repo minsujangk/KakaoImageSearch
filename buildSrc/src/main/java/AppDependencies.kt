@@ -48,6 +48,9 @@ object AppDependencies {
     // loupe
     val loupe = "com.igreenwood.loupe:loupe:${Versions.loupe}"
 
+    // photoView
+    val photoView = "com.github.chrisbanes:PhotoView:${Versions.photoView}"
+
     val implementations = arrayListOf<String>().apply {
         add(kotlinStdLib)
         add(coreKtx)
@@ -65,6 +68,7 @@ object AppDependencies {
         add(pagingRumtime)
         add(glide)
         add(loupe)
+        add(photoView)
     }
 
     val testImplementations = arrayListOf<String>().apply {

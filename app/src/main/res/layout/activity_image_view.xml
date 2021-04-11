@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:titleTextColor="?attr/colorOnPrimary" />
 
-        <ImageView
+        <com.github.chrisbanes.photoview.PhotoView
             android:id="@+id/imageView_imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

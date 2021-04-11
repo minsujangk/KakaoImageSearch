@@ -37,4 +37,7 @@ object Versions {
 
     // loupe
     val loupe = "1.2.1"
+
+    // photoView
+    val photoView = "2.3.0"
 }
