@@ -1,6 +1,7 @@
 package nobleminsu.kakaoimagesearch
 
 import android.app.Application
+import android.content.Context
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -10,5 +11,10 @@ class KakaoImageSearchApplication : Application() {
         super.onCreate()
 
         Timber.plant(Timber.DebugTree())
+        appCtx = this.applicationContext
+    }
+
+    companion object {
+        lateinit var appCtx: Context
     }
 }
