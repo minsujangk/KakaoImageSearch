@@ -28,7 +28,7 @@ class ImageSearchRemotePagingSource @AssistedInject constructor(
                 kakaoApiInterface.getImageSearch(
                     query,
                     page = pageToLoad,
-                    size = PAGE_SIZE
+                    size = params.loadSize
                 )
             }) {
             is DataResult.Success -> LoadResult.Page(
