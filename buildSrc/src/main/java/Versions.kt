@@ -18,6 +18,9 @@ object Versions {
     val junit = "4.13.2"
     val extJunit = "1.1.2"
     val espressoCore = "3.3.0"
+    val robolectric = "1.0.0"
+    val mockito = "1.10.19"
+    val mockitoKotlin = "3.1.0"
 
     // hilt
     val hilt = "2.33-beta"

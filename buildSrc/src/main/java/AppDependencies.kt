@@ -23,6 +23,10 @@ object AppDependencies {
     val junit = "junit:junit:${Versions.junit}"
     val extJunit = "androidx.test.ext:junit:${Versions.extJunit}"
     val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCore}"
+    val robolectric = "androidx.test:core:${Versions.robolectric}"
+    val mockito = "org.mockito:mockito-core:${Versions.mockito}"
+    val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}"
+
 
     // hilt
     val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
@@ -74,6 +78,9 @@ object AppDependencies {
     val testImplementations = arrayListOf<String>().apply {
         add(junit)
         add(pagingCommon)
+        add(mockito)
+        add(robolectric)
+        add(mockitoKotlin)
     }
 
     val androidTestImplementations = arrayListOf<String>().apply {
