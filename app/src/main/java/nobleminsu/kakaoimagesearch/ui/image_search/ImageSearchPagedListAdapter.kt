@@ -59,13 +59,18 @@ class ImageSearchPagedListAdapter(
             .mapIndexed { index, documentDto -> index to documentDto }
             .filter { isFilteredDocument(it.second) }
             .also {
-                if (oldFilteredSize == it.size) currentList?.apply { loadAround(loadedCount - 1) }
+                if (oldFilteredSize == it.size) currentList?.apply {
+                    if (loadedCount - 1 >= 0) loadAround(loadedCount - 1)
+                }
             }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         filteredList?.also {
-            getItem(it[position].first)?.let {
+            // TODO: prettify codes, variables
+            val curItemIndex = it[position].first
+            if (curItemIndex >= currentList?.size ?: 0) return
+            getItem(curItemIndex)?.let {
                 holder.bind(
                     it,
                     isFilteredDocument(it),
