@@ -31,9 +31,14 @@ class ImageSearchViewModel @Inject constructor(
         listOf(COLLECTION_ALL) + it.map { it.collection }.distinct()
     }
 
-    private val _selectedCollection = MutableLiveData(emptyList<String>())
-    // TODO: 태그가 바뀌면 all로 초기화
-    //        tags.switchMap { MutableLiveData(emptyList<String>()) } as MutableLiveData
+    private val _selectedCollection = MediatorLiveData<List<String>>()
+        .apply {
+            value = emptyList()
+            // when tags change,
+            addSource(tags) { curTags ->
+                value = value?.filter { it in curTags }
+            }
+        }
 
     val selectedCollection = _selectedCollection as LiveData<List<String>>
 
