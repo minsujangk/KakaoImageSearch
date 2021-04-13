@@ -34,6 +34,10 @@ class ImageSearchActivity : AppCompatActivity() {
             imageSearchViewModel.searchedDocuments.observe(this@ImageSearchActivity) {
                 submitList(it)
             }
+            imageSearchViewModel.selectedCollection.observe(this@ImageSearchActivity) {
+                collectionFilters = it
+                notifyDataSetChanged()
+            }
         }
 
         binding.recyclerViewImageSearchTag.adapter =
