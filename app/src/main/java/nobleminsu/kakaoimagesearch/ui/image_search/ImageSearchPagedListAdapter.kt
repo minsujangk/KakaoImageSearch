@@ -9,12 +9,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto
 import nobleminsu.kakaoimagesearch.databinding.ItemImageSearchDocumentBinding
+import timber.log.Timber
 
 // TODO: Image gallery view로 대체
 class ImageSearchPagedListAdapter(
     private val onClickImageItem: (document: ImageSearchResponseDocumentDto) -> Unit
 ) : PagedListAdapter<ImageSearchResponseDocumentDto, ImageSearchPagedListAdapter.ViewHolder>(DIFF) {
     private var filteredList: List<Pair<Int, ImageSearchResponseDocumentDto>>? = null
+    var filterCalculatedSize = 0
     var collectionFilters: List<String>? = null
         set(value) {
             field = value
@@ -23,6 +25,20 @@ class ImageSearchPagedListAdapter(
                 notifyDataSetChanged()
             }
         }
+
+    init {
+        registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+                Timber.e("dapi item range changed start=$positionStart count=$itemCount")
+                currentList?.let { updateFilteredList(it) }
+            }
+
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                Timber.e("dapi item range inserted start=$positionStart count=$itemCount")
+                currentList?.let { updateFilteredList(it) }
+            }
+        })
+    }
 
     override fun submitList(pagedList: PagedList<ImageSearchResponseDocumentDto>?) {
         if (pagedList != null) {
@@ -45,21 +61,27 @@ class ImageSearchPagedListAdapter(
         filteredList = list
             .mapIndexed { index, documentDto -> index to documentDto }
             .filter { isFilteredDocument(it.second) }
+        filterCalculatedSize = list.size
+        println("dapi filtered size=${filteredList?.size}, orig size=$filterCalculatedSize")
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        filteredList?.get(position)?.first
-            ?.let {
-                currentList ?: return@let null
-                return@let if (it < currentList!!.size) getItem(it) else null
+        filteredList?.let {
+            val lastItemIndex = it.last().first
+            if (position < it.size) {
+                getItem(it[position].first)?.let {
+                    holder.bind(
+                        it,
+                        isFilteredDocument(it),
+                        onClickImageItem
+                    )
+                }
+            } else {
+                Timber.e("dapi lastItemIndex=$lastItemIndex getItem(${position - it.lastIndex + lastItemIndex})")
+                getItem(position - it.lastIndex + lastItemIndex)
             }
-            ?.let {
-                holder.bind(
-                    it,
-                    isFilteredDocument(it),
-                    onClickImageItem
-                )
-            }
+
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -67,7 +89,11 @@ class ImageSearchPagedListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return filteredList?.size ?: 0
+        val origCount = super.getItemCount()
+        val lastItemIndex = filteredList?.lastOrNull()?.first ?: 0
+        Timber.e("dapi super item count=$origCount filtered count=${filteredList?.size} " +
+                "returning count=${filteredList?.run { origCount + lastIndex - lastItemIndex } ?: 0} ")
+        return (filteredList?.run { origCount + lastIndex - lastItemIndex } ?: 0)
     }
 
     private fun isFilteredDocument(documentDto: ImageSearchResponseDocumentDto) =
