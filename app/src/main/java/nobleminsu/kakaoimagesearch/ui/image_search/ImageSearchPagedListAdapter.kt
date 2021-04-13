@@ -2,7 +2,7 @@ package nobleminsu.kakaoimagesearch.ui.image_search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto
@@ -11,7 +11,7 @@ import nobleminsu.kakaoimagesearch.databinding.ItemImageSearchDocumentBinding
 // TODO: Image gallery view로 대체
 class ImageSearchPagedListAdapter(
     private val onClickImageItem: (document: ImageSearchResponseDocumentDto) -> Unit
-) : PagingDataAdapter<ImageSearchResponseDocumentDto, ImageSearchPagedListAdapter.ViewHolder>(DIFF) {
+) : PagedListAdapter<ImageSearchResponseDocumentDto, ImageSearchPagedListAdapter.ViewHolder>(DIFF) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it, onClickImageItem) }
     }

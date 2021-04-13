@@ -6,9 +6,7 @@ import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import nobleminsu.kakaoimagesearch.R
 import nobleminsu.kakaoimagesearch.databinding.ActivityImageSearchBinding
 import nobleminsu.kakaoimagesearch.ui.common.observeOnLifecycle
@@ -33,10 +31,15 @@ class ImageSearchActivity : AppCompatActivity() {
         binding.recyclerViewImageSearch.adapter = ImageSearchPagedListAdapter(
             imageSearchEventViewModel::clickImage
         ).apply {
-            lifecycleScope.launchWhenCreated {
-                imageSearchViewModel.searchDocuments.collectLatest {
-                    submitData(lifecycle, it)
-                }
+            imageSearchViewModel.searchedDocuments.observe(this@ImageSearchActivity) {
+                submitList(it)
+            }
+        }
+
+        binding.recyclerViewImageSearchTag.adapter = ImageSearchTagAdapter().apply {
+            imageSearchViewModel.tags.observe(this@ImageSearchActivity) {
+                tagList = it
+                notifyDataSetChanged()
             }
         }
 

@@ -1,11 +1,10 @@
 package nobleminsu.kakaoimagesearch.data.sources
 
-import androidx.paging.PagingSource
 import kotlinx.coroutines.runBlocking
 import nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto
 import nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDto
 import nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseMeta
-import nobleminsu.kakaoimagesearch.data.sources.image_search.ImageSearchRemotePagingSource
+import nobleminsu.kakaoimagesearch.data.sources.image_search.ImageSearchRemotePagingDataSource
 import nobleminsu.kakaoimagesearch.network.interfaces.KakaoApiInterface
 import org.junit.Assert
 import org.junit.Test
@@ -38,7 +37,7 @@ class ImageSearchRemotePagingSourceTest {
                     getImageSearch(
                         query,
                         page = 1,
-                        size = ImageSearchRemotePagingSource.PAGE_SIZE
+                        size = ImageSearchRemotePagingDataSource.PAGE_SIZE
                     )
                 }.doReturn(
                     ImageSearchResponseDto(
@@ -48,19 +47,11 @@ class ImageSearchRemotePagingSourceTest {
                 )
             }
 
-            val pagingSource = ImageSearchRemotePagingSource(mockApi, query)
+            val pagingSource = ImageSearchRemotePagingDataSource(mockApi, query)
 
-            val loaded = pagingSource.load(
-                PagingSource.LoadParams.Append(
-                    1,
-                    ImageSearchRemotePagingSource.PAGE_SIZE,
-                    false
-                )
-            )
+            val loaded = pagingSource.loadPage(1)
 
-
-            Assert.assertTrue(loaded is PagingSource.LoadResult.Page)
-            Assert.assertTrue((loaded as PagingSource.LoadResult.Page).data.mapIndexed { index, imageSearchResponseDocumentDto ->
+            Assert.assertTrue(loaded!!.mapIndexed { index, imageSearchResponseDocumentDto ->
                 index to imageSearchResponseDocumentDto
             }.all { mockDocuments[it.first] == it.second })
         }
