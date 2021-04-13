@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <import type="kotlin.Unit" />
+
         <variable
             name="tagName"
             type="String" />
+
+        <variable
+            name="selected"
+            type="Boolean" />
+
+        <variable
+            name="onClick"
+            type="kotlin.jvm.functions.Function0&lt;Unit>" />
     </data>
 
     <FrameLayout
@@ -15,9 +26,13 @@
         android:paddingHorizontal="4dp">
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/chip_imageSearch_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="@{() -> onClick.invoke()}"
             android:text="@{tagName}"
+            app:chipBackgroundColor="@{selected ? @color/collection_yellow : @color/collection_gray }"
+            tools:backgroundTint="@color/teal_700"
             tools:text="blog" />
     </FrameLayout>
 </layout>

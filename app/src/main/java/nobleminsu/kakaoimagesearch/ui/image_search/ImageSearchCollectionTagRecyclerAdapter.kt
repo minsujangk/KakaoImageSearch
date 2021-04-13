@@ -6,10 +6,26 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import nobleminsu.kakaoimagesearch.databinding.ItemImageSearchTagBinding
 
-class ImageSearchTagAdapter : RecyclerView.Adapter<ImageSearchTagAdapter.ViewHolder>() {
-    var tagList: List<String>? = null
+class ImageSearchCollectionTagRecyclerAdapter(
+    private val onClickCollection: (String) -> Unit
+) : RecyclerView.Adapter<ImageSearchCollectionTagRecyclerAdapter.ViewHolder>() {
+    var collectionList: List<String>? = null
+    var selectedCollection: List<String>? = null
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        tagList?.get(position)?.let { holder.bind(it) }
+        collectionList?.get(position)?.let { collection ->
+            holder.bind(
+                collection = collection,
+                selected = when (collection) {
+                    ImageSearchViewModel.COLLECTION_ALL -> {
+                        selectedCollection.isNullOrEmpty()
+                    }
+                    else -> {
+                        selectedCollection?.contains(collection) ?: false
+                    }
+                },
+                onClick = { onClickCollection(collection) }
+            )
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -17,13 +33,15 @@ class ImageSearchTagAdapter : RecyclerView.Adapter<ImageSearchTagAdapter.ViewHol
     }
 
     override fun getItemCount(): Int {
-        return tagList?.size ?: 0
+        return collectionList?.size ?: 0
     }
 
     class ViewHolder(private val binding: ItemImageSearchTagBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(collection: String) {
+        fun bind(collection: String, selected: Boolean, onClick: () -> Unit) {
             binding.tagName = collection
+            binding.selected = selected
+            binding.onClick = onClick
         }
     }
 

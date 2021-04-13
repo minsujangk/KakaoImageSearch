@@ -36,12 +36,19 @@ class ImageSearchActivity : AppCompatActivity() {
             }
         }
 
-        binding.recyclerViewImageSearchTag.adapter = ImageSearchTagAdapter().apply {
-            imageSearchViewModel.tags.observe(this@ImageSearchActivity) {
-                tagList = it
-                notifyDataSetChanged()
+        binding.recyclerViewImageSearchTag.adapter =
+            ImageSearchCollectionTagRecyclerAdapter(
+                imageSearchViewModel::toggleCollection
+            ).apply {
+                imageSearchViewModel.tags.observe(this@ImageSearchActivity) {
+                    collectionList = it
+                    notifyDataSetChanged()
+                }
+                imageSearchViewModel.selectedCollection.observe(this@ImageSearchActivity) {
+                    selectedCollection = it
+                    notifyDataSetChanged()
+                }
             }
-        }
 
         imageSearchEventViewModel.eventsFlow.observeOnLifecycle(this) {
             when (it) {
