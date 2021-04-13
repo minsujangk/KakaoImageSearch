@@ -33,7 +33,7 @@ object Versions {
     val timber = "4.7.1"
 
     // paging
-    val paging = "3.0.0-beta02"
+    val paging = "2.1.2"
 
     // glide
     val glide = "4.12.0"
