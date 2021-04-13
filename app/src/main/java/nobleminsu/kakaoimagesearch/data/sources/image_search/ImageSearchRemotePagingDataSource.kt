@@ -19,7 +19,7 @@ class ImageSearchRemotePagingDataSource @AssistedInject constructor(
             apiCall {
                 kakaoApiInterface.getImageSearch(
                     query,
-                    page = page, // initial page is from 1
+                    page = page + 1, // initial page is from 1
                     size = PAGE_SIZE
                 )
             }
