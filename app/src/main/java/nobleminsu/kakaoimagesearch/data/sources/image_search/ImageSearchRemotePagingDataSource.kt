@@ -46,6 +46,6 @@ class ImageSearchRemotePagingDataSource @AssistedInject constructor(
     }
 
     companion object {
-        const val PAGE_SIZE = 16
+        const val PAGE_SIZE = 40
     }
 }
