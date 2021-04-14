@@ -9,9 +9,9 @@ import nobleminsu.kakaoimagesearch.network.interfaces.KakaoApiInterface
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
-import org.mockito.runners.MockitoJUnitRunner
 import java.util.*
 
 @RunWith(MockitoJUnitRunner::class)
@@ -49,7 +49,7 @@ class ImageSearchRemotePagingSourceTest {
 
             val pagingSource = ImageSearchRemotePagingDataSource(mockApi, query)
 
-            val loaded = pagingSource.loadPage(1)
+            val loaded = pagingSource.loadPage(0)
 
             Assert.assertTrue(loaded!!.mapIndexed { index, imageSearchResponseDocumentDto ->
                 index to imageSearchResponseDocumentDto
