@@ -14,7 +14,6 @@ class ImageSearchRepositoryImpl @Inject constructor(
         page: Int?,
         size: Int?
     ): DataResult<ImageSearchResponseDto> {
-        // TODO: consider local datasource
         return imageSearchRemoteDataSource.getImageSearch(query, sort, page, size)
     }
 }

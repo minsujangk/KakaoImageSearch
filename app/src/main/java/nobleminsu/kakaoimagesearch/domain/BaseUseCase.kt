@@ -19,7 +19,6 @@ abstract class BaseUseCase : UseCase {
     override var errorHandler: ((Exception) -> Unit)? = null
 }
 
-// TODO: Testing 필요!!!
 suspend fun <T> UseCase.handleDataResultAsync(caller: suspend () -> DataResult<T>): Deferred<T?> {
     return CoroutineScope(coroutineContext).async {
         caller.invoke().let {

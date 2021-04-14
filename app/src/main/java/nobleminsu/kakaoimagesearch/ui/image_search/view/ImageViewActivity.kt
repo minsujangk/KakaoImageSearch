@@ -57,8 +57,6 @@ class ImageViewActivity : AppCompatActivity() {
             )
             handleImageInfoAutoHide(imageViewViewModel, it)
         }
-
-        // TODO: image download
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

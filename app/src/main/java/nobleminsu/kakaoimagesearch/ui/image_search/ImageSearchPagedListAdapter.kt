@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto
 import nobleminsu.kakaoimagesearch.databinding.ItemImageSearchDocumentBinding
 
-// TODO: Image gallery view로 대체
 class ImageSearchPagedListAdapter(
     private val onClickImageItem: (document: ImageSearchResponseDocumentDto) -> Unit
 ) : PagedListAdapter<ImageSearchResponseDocumentDto, ImageSearchPagedListAdapter.ViewHolder>(DIFF) {
