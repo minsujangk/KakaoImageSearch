@@ -2,7 +2,6 @@ package nobleminsu.kakaoimagesearch.ui.image_search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -13,6 +12,7 @@ import nobleminsu.kakaoimagesearch.databinding.ItemImageSearchDocumentBinding
 class ImageSearchPagedListAdapter(
     private val onClickImageItem: (document: ImageSearchResponseDocumentDto) -> Unit
 ) : PagedListAdapter<ImageSearchResponseDocumentDto, ImageSearchPagedListAdapter.ViewHolder>(DIFF) {
+    // list of original index of the item + document dto
     private var filteredList: List<Pair<Int, ImageSearchResponseDocumentDto>>? = null
     var collectionFilters: List<String>? = null
         set(value) {
@@ -54,12 +54,13 @@ class ImageSearchPagedListAdapter(
         super.submitList(pagedList, commitCallback)
     }
 
-    private fun updateFilteredList(list: PagedList<ImageSearchResponseDocumentDto>) {
+    private fun updateFilteredList(pagedList: PagedList<ImageSearchResponseDocumentDto>) {
         val oldFilteredSize = filteredList?.size
-        filteredList = list
+        filteredList = pagedList
             .mapIndexed { index, documentDto -> index to documentDto }
             .filter { isFilteredDocument(it.second) }
             .also {
+                // if nothing is loaded in the new list, load more items
                 if (oldFilteredSize == it.size) currentList?.apply {
                     if (loadedCount - 1 >= 0) loadAround(loadedCount - 1)
                 }
@@ -67,21 +68,14 @@ class ImageSearchPagedListAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        filteredList?.also {
-            // TODO: prettify codes, variables
-            val curItemIndex = it[position].first
-            if (curItemIndex >= currentList?.size ?: 0) return
-            getItem(curItemIndex)?.let {
-                holder.bind(
-                    it,
-                    isFilteredDocument(it),
-                    onClickImageItem
-                )
-            }
-            if (position == it.lastIndex) {
-                currentList?.apply {
-                    loadAround(loadedCount - 1)
-                }
+        filteredList?.also { filteredList ->
+            val origIndex = filteredList[position].first
+            if (origIndex >= currentList?.size ?: 0) return
+
+            getItem(origIndex)?.let { holder.bind(it, onClickImageItem) }
+            // if this is the last item in filteredList, load more items
+            if (position == filteredList.lastIndex) {
+                currentList?.apply { loadAround(loadedCount - 1) }
             }
         }
     }
@@ -91,12 +85,13 @@ class ImageSearchPagedListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return filteredList?.size ?: 0
+        return filteredList?.size ?: 0 // display the items of filteredList
     }
 
     private fun isFilteredDocument(documentDto: ImageSearchResponseDocumentDto) =
         collectionFilters?.run {
-            if (isEmpty()) true else contains(documentDto.collection)
+            if (isEmpty()) true // if filters are empty, "all" mode
+            else contains(documentDto.collection)
         } ?: true
 
 
@@ -104,12 +99,10 @@ class ImageSearchPagedListAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
             documentDto: ImageSearchResponseDocumentDto,
-            isFiltered: Boolean,
             onClick: (ImageSearchResponseDocumentDto) -> Unit
         ) {
             binding.document = documentDto
             binding.onClick = onClick
-            binding.root.isVisible = isFiltered
         }
     }
 
