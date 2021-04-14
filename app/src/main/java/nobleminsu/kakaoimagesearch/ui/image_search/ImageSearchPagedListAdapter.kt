@@ -24,7 +24,6 @@ class ImageSearchPagedListAdapter(
         }
 
     // TODO: 테스트 작성
-    // TODO: 탭 전환시 더 로드되는 문제 살펴보기
     init {
         registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
