@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="kotlin.Unit" />
+
+        <import type="nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto" />
+
+        <variable
+            name="document"
+            type="nobleminsu.kakaoimagesearch.data.models.ImageSearchResponseDocumentDto" />
+
+        <variable
+            name="onClick"
+            type="kotlin.jvm.functions.Function1&lt;ImageSearchResponseDocumentDto, Unit>" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{_ -> onClick.invoke(document)}">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:imageUrl="@{document.thumbnailUrl}"
+            app:layout_constraintDimensionRatio="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_foreground" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

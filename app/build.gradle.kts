@@ -58,7 +58,7 @@ android {
                 com.android.builder.internal.ClassFieldImpl(
                     "String",
                     "BASE_URL",
-                    "\"dapi.kakao.com\""
+                    "\"https://dapi.kakao.com\""
                 )
             )
         }
@@ -68,10 +68,14 @@ android {
                 com.android.builder.internal.ClassFieldImpl(
                     "String",
                     "BASE_URL",
-                    "\"dapi.kakao.com\""
+                    "\"https://dapi.kakao.com\""
                 )
             )
         }
+    }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
     }
 }
 
@@ -80,4 +84,5 @@ dependencies {
     testImplementation(AppDependencies.testImplementations)
     androidTestImplementation(AppDependencies.androidTestImplementations)
     kapt(AppDependencies.kapts)
+    kapt ("androidx.hilt:hilt-compiler:1.0.0-beta01")
 }

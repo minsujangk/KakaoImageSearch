@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="nobleminsu.kakaoimagesearch.ui.image_search.view.ImageViewViewModel" />
+
+        <import type="nobleminsu.kakaoimagesearch.ui.util.DateExtKt" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/imageView_imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            app:imageUrl="@{viewModel.documentDtoLiveData.imageUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIconTint="?attr/colorOnPrimary"
+            app:titleTextColor="?attr/colorOnPrimary" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout_imageView_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#222222"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/textView_imageView_siteName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@{viewModel.documentDtoLiveData.displaySiteName}"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/textView_imageView_doc"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="사이트 이름" />
+
+            <TextView
+                android:id="@+id/textView_imageView_doc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:autoLink="web"
+                android:text="@{viewModel.documentDtoLiveData.docUrl}"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView_imageView_size"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="https://daum.net" />
+
+            <TextView
+                android:id="@+id/textView_imageView_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{DateExtKt.formatDate(viewModel.documentDtoLiveData.datetime)}"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="2021.04.11" />
+
+            <TextView
+                android:id="@+id/textView_imageView_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@{viewModel.documentDtoLiveData.width + `x` + viewModel.documentDtoLiveData.height}"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/textView_imageView_siteName"
+                app:layout_constraintStart_toEndOf="@+id/textView_imageView_date"
+                tools:text="30x30" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
